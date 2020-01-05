@@ -119,4 +119,6 @@ void Move::PosSwerve_Move(int lx, int ly, int rx) {
                           *yaw);
   }
 }
-void Move::SteerSwerve_Move(int lx, int ly, int rx) {}
+void Move::SteerSwerve_Move(int lx, int ly, int rx) {
+  //  プルして―
+}
