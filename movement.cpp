@@ -1,6 +1,6 @@
 #include "movement.h"
 
-Move(int *p_duty, double *p_yaw) {
+Move::Move(int *p_duty, double *p_yaw) {
   duty = p_duty;
   yaw = p_yaw;
 }
