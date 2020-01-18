@@ -7,12 +7,14 @@
 #define M_PI_4 (M_PI / 4)
 
 #include <math.h>
+#include "mbed.h"
 
 #define DEG_TO_RAD(x) ((x)*M_PI / 180.0)
 #define RAD_TO_DEG(x) ((x)*180.0 / M_PI)
 
 class Move {
  public:
+  Move(int *p_duty, double const_yaw);
   Move(int *p_duty, double *p_yaw);
   Move(int *p_duty, int *p_angle, double *p_yaw);
   void TetraOmni_Move(int lx, int ly, int rx);
