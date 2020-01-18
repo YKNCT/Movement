@@ -11,7 +11,26 @@ Move::Move(int *p_duty, int *p_angle, double *p_yaw) {
   yaw = p_yaw;
 }
 
-void Move::TetraOmni_Move(int lx, int ly, int rx) {
+void Move::CrossOmni_Move(int lx, int ly, int rx) {
+  duty[0] = lx * cos(DEG_TO_RAD(*yaw) / 4) + ly * sin(DEG_TO_RAD(*yaw) / 4);
+  duty[1] = -lx * sin(DEG_TO_RAD(*yaw) / 4) + ly * cos(DEG_TO_RAD(*yaw) / 4);
+  duty[2] = -lx * cos(DEG_TO_RAD(*yaw) / 4) - ly * sin(DEG_TO_RAD(*yaw) / 4);
+  duty[3] = lx * sin(DEG_TO_RAD(*yaw) / 4) - ly * cos(DEG_TO_RAD(*yaw) / 4);
+
+  for (int i = 0; i < 4; i++) {
+    duty[i] += rx;
+
+    if (i == 0)
+      duty_max = abs(duty[0]);
+    else if (duty_max < abs(duty[i]))
+      duty_max = abs(duty[i]);
+  }
+  for (int i = 0; i < 4; i++) {
+    if (duty_max > 99) duty[i] = duty[i] * 99 / duty_max;
+  }
+}
+
+void Move::XmarkOmni_Move(int lx, int ly, int rx) {
   duty[0] = lx * cos(DEG_TO_RAD(*yaw) + M_PI / 4) +
             ly * sin(DEG_TO_RAD(*yaw) + M_PI / 4);
   duty[1] = -lx * sin(DEG_TO_RAD(*yaw) + M_PI / 4) +
