@@ -14,7 +14,7 @@
 
 class Move {
  public:
-  Move(int *p_duty, const double const_yaw);
+  Move(int *p_duty, double const_yaw);
   Move(int *p_duty, double *p_yaw);
   Move(int *p_duty, int *p_angle, double *p_yaw);
   void CrossOmni_Move(int lx, int ly, int rx);
