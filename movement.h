@@ -17,7 +17,8 @@ class Move {
   Move(int *p_duty, double const_yaw);
   Move(int *p_duty, double *p_yaw);
   Move(int *p_duty, int *p_angle, double *p_yaw);
-  void TetraOmni_Move(int lx, int ly, int rx);
+  void CrossOmni_Move(int lx, int ly, int rx);
+  void XmarkOmni_Move(int lx, int ly, int rx);
   void TriOmni_Move(int lx, int ly, int rx);
   void Mecanum_Move(int lx, int ly, int rx);
   void PosSwerve_Move(int lx, int ly, int rx);

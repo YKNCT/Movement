@@ -2,7 +2,7 @@
 
 Move::Move(int *p_duty, double const_yaw) {
   duty = p_duty;
-  *yaw = const_yaw;
+  yaw = &const_yaw;
 }
 
 Move::Move(int *p_duty, double *p_yaw) {
