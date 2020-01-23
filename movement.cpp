@@ -1,7 +1,8 @@
 #include "movement.h"
 
-Move::Move(int *p_duty, double const_yaw) {
+Move::Move(int *p_duty, double l_const_yaw) {
   duty = p_duty;
+  const_yaw = l_const_yaw;
   yaw = &const_yaw;
 }
 

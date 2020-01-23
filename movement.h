@@ -4,7 +4,9 @@
 #ifndef M_PI
 #define M_PI 3.1415926535897932384626433832795
 #endif
+#ifndef M_PI_4
 #define M_PI_4 (M_PI / 4)
+#endif
 
 #include <math.h>
 #include "mbed.h"
@@ -27,6 +29,7 @@ class Move {
  private:
   int *duty, *angle;
   double *yaw;
+  double const_yaw;
   int duty_max;
 };
 
