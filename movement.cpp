@@ -1,27 +1,18 @@
 #include "movement.h"
 
-Move::Move(int *p_duty, double l_const_yaw) {
-  duty = p_duty;
-  const_yaw = l_const_yaw;
-  yaw = &const_yaw;
-}
+Move::Move(int *p_duty, double l_const_yaw)
+    : duty(p_duty), const_yaw(l_const_yaw), yaw(&const_yaw) {}
 
-Move::Move(int *p_duty, double *p_yaw) {
-  duty = p_duty;
-  yaw = p_yaw;
-}
+Move::Move(int *p_duty, double *p_yaw) : duty(p_duty), yaw(p_yaw) {}
 
-Move::Move(int *p_duty, int *p_angle, double *p_yaw) {
-  duty = p_duty;
-  angle = p_angle;
-  yaw = p_yaw;
-}
+Move::Move(int *p_duty, int *p_angle, double *p_yaw)
+    : duty(p_duty), angle(p_angle), yaw(p_yaw) {}
 
 void Move::CrossOmni_Move(int lx, int ly, int rx) {
   duty[0] = lx * cos(DEG_TO_RAD(*yaw) / 4) + ly * sin(DEG_TO_RAD(*yaw) / 4);
   duty[1] = -lx * sin(DEG_TO_RAD(*yaw) / 4) + ly * cos(DEG_TO_RAD(*yaw) / 4);
-  duty[2] = -duty[0];
-  duty[3] = -duty[1];
+  duty[2] = -lx * cos(DEG_TO_RAD(*yaw) / 4) - ly * sin(DEG_TO_RAD(*yaw) / 4);
+  duty[3] = lx * sin(DEG_TO_RAD(*yaw) / 4) - ly * cos(DEG_TO_RAD(*yaw) / 4);
 
   for (int i = 0; i < 4; i++) {
     duty[i] += rx;
@@ -41,8 +32,10 @@ void Move::XmarkOmni_Move(int lx, int ly, int rx) {
             ly * sin(DEG_TO_RAD(*yaw) + M_PI / 4);
   duty[1] = -lx * sin(DEG_TO_RAD(*yaw) + M_PI / 4) +
             ly * cos(DEG_TO_RAD(*yaw) + M_PI / 4);
-  duty[2] = -duty[0];
-  duty[3] = -duty[1];
+  duty[2] = -lx * cos(DEG_TO_RAD(*yaw) + M_PI / 4) -
+            ly * sin(DEG_TO_RAD(*yaw) + M_PI / 4);
+  duty[3] = lx * sin(DEG_TO_RAD(*yaw) + M_PI / 4) -
+            ly * cos(DEG_TO_RAD(*yaw) + M_PI / 4);
 
   for (int i = 0; i < 4; i++) {
     duty[i] += rx;
@@ -84,8 +77,10 @@ void Move::Mecanum_Move(int lx, int ly, int rx) {
             lx * sin(DEG_TO_RAD(*yaw)) + ly * cos(DEG_TO_RAD(*yaw));
   duty[1] = -lx * cos(DEG_TO_RAD(*yaw)) - ly * sin(DEG_TO_RAD(*yaw)) -
             lx * sin(DEG_TO_RAD(*yaw)) + ly * cos(DEG_TO_RAD(*yaw));
-  duty[2] = -duty[0];
-  duty[3] = -duty[1];
+  duty[2] = -lx * cos(DEG_TO_RAD(*yaw)) - ly * sin(DEG_TO_RAD(*yaw)) +
+            lx * sin(DEG_TO_RAD(*yaw)) - ly * cos(DEG_TO_RAD(*yaw));
+  duty[3] = lx * cos(DEG_TO_RAD(*yaw)) + ly * sin(DEG_TO_RAD(*yaw)) +
+            lx * sin(DEG_TO_RAD(*yaw)) - ly * cos(DEG_TO_RAD(*yaw));
 
   for (int i = 0; i < 4; i++) {
     duty[i] += rx;

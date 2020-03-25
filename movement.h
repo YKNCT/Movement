@@ -15,6 +15,12 @@
 #define RAD_TO_DEG(x) ((x)*180.0 / M_PI)
 
 class Move {
+ private:
+  int *duty, *angle;
+  double *yaw;
+  double const_yaw;
+  int duty_max;
+
  public:
   Move(int *p_duty, double const_yaw);
   Move(int *p_duty, double *p_yaw);
@@ -25,12 +31,6 @@ class Move {
   void Mecanum_Move(int lx, int ly, int rx);
   void PosSwerve_Move(int lx, int ly, int rx);
   void SteerSwerve_Move(int lx, int ly, int rx);
-
- private:
-  int *duty, *angle;
-  double *yaw;
-  double const_yaw;
-  int duty_max;
 };
 
 #endif
